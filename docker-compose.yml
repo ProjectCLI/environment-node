@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:1
+    volumes:
+      - ./src:/usr/share/nginx/html
+    ports:
+      - "${APP_PORT}:80"
+    networks:
+      - default
+  yarn:
+    image: kkarczmarczyk/node-yarn
+    volumes:
+      - ./src:/var/www
+  node:
+    image: chriha/node:12
+    volumes:
+      - ./src:/var/www
+
+networks:
+  default:
+    driver: "bridge"
